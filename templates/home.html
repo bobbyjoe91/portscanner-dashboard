@@ -1,45 +1,21 @@
 <!DOCTYPE html>
+ {% load staticfiles %}
 <html>
 
 <head>
     <title>Dashboard</title>
-    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/dataTables.bootstrap4.min.css"></script>
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css' %}">
     <script>
         $(document).ready(function () {
             var groupColumn = 0;
-            $('#data_tabel').DataTable({
-
-                "paging": false,
-                "searching": false,
-                "columnDefs": [
-                    { "visible": false, "targets": groupColumn }
-                ],
-                "order": [[groupColumn, 'asc']],
-                "displayLength": 25,
-                "drawCallback": function (settings) {
-                    var api = this.api();
-                    var rows = api.rows({ page: 'current' }).nodes();
-                    var last = null;
-
-                    api.column(groupColumn, { page: 'current' }).data().each(function (group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before(
-                                '<tr class="group" style="background-color"><td colspan="10"><b>' + group + '</b></td></tr>'
-                            );
-
-                            last = group;
-                        }
-                    });
-                }
+            $('#data').DataTable({
             })
         });
     </script>
@@ -48,7 +24,7 @@
 <body>
     <div class="main-content">
         <div class="container">
-            <table id="data_tabel" class="display table table-bordered">
+            <table id="data" class="display table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th>IP</th>
