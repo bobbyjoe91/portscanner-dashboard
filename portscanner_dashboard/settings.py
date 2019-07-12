@@ -80,9 +80,20 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
+    # 'default': {
+    #     'ENGINE': 'djongo',
+    #     'NAME': 'port_status',
+    #     'HOST': 'mongodb+srv://bobby:8DlCU11ttjKq6G2t@asli-ri-monitoring-wtiiq.gcp.mongodb.net/test?retryWrites=true&w=majority',
+    #     'USER': 'bobby',
+    #     'PASSWORD': '8DlCU11ttjKq6G2t',
+    # }
+    # experimenting on multicollection query
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'port_status',
+        'HOST': 'mongodb+srv://bobbyjoe91:irebelthereforeiexist@overtherainbow-025ue.gcp.mongodb.net/test?retryWrites=true&w=majority',
+        'USER': 'bobbyjoe91',
+        'PASSWORD': 'irebelthereforeiexist',
     }
 }
 
