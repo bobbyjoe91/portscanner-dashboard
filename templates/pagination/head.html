@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+ {% load staticfiles %}
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css' %}">
+    <script>
+        $(document).ready(function () {
+            var groupColumn = 0;
+            $('#data').DataTable({
+            })
+        });
+    </script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm bg-danger navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">Admin</a>
+      </li>
+    </ul>
+  </nav><br>
+
+  {% block body_block %}
+  {% endblock %}
+</body>
+
+</html>
