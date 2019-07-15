@@ -56,7 +56,7 @@
 {% block sidebar %}
 <div id="content-related">
     <div class="module" id="recent-actions-module">
-        <h2>{% trans 'Recent actions' %}</h2>
+        <h2 style="background:#ff6961; color:white;">{% trans 'Recent actions' %}</h2>
         <h3>{% trans 'My actions' %}</h3>
             {% load log %}
             {% get_admin_log 10 as admin_log for_user user %}
