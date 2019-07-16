@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dashboard'
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'port_status',
-        'HOST': 'mongodb+srv://bobbyjoe91:irebelthereforeiexist@overtherainbow-025ue.gcp.mongodb.net/test?retryWrites=true&w=majority',
+        'HOST': 'mongodb+srv://bobbyjoe91:irebelthereforeiexist@portscanner-025ue.gcp.mongodb.net/test?retryWrites=true&w=majority',
         'USER': 'bobbyjoe91',
         'PASSWORD': 'irebelthereforeiexist',
     }

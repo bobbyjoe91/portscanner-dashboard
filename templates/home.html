@@ -1,7 +1,5 @@
 {% extends "pagination/head.html" %}
-{% block body_block %}
-    <div class="wrapper">
-        <div class="container-fluid">
+{% block table %}
           {% if port_status %}
             <table id="data" class=" table table-bordered">
                 <thead class="thead">
@@ -26,6 +24,4 @@
           {% else %}
             <h3>NO DATA EXIST</h3>
           {% endif %}
-        </div>
-    </div>
 {% endblock %}
