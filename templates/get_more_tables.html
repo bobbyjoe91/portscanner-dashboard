@@ -1,0 +1,10 @@
+<tbody>
+    {% for data in port_status %}
+    <tr>
+        <td>{{ data.ip }}</td>
+        <td>{{ data.port }}</td>
+        <td>{{ data.status }}</td>
+        <td>{{ data.timestamp }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
