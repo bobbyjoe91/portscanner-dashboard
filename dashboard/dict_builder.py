@@ -10,7 +10,7 @@ def retrieve():
     db = client[db_name]
 
     data = dict()
-    for collection in db.collection_names():
+    for collection in db.list_collection_names():
         data[collection] = list(db[collection].find())
 
     return data
