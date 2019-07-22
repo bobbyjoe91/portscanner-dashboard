@@ -20,5 +20,5 @@ from dashboard import views
 
 urlpatterns = [
     path('home/', views.home, name='home'),
-    path('table/', views.table),
+    re_path('table/', views.table),
 ]
