@@ -25,3 +25,8 @@ def retrieve(nrow='All'):
                 data[collection] = list(db[collection].find().sort('timestamp', -1))
 
     return data
+
+def retrieve_by_ip_and_port(ip, port):
+    data = list(db[ip].find({"port":port}))
+
+    return data
