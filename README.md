@@ -1,7 +1,6 @@
 #### Requirement
-djongo -> pip install djongo<br>
+pymongo -> pip install pymongo<br>
 dnspython -> pip install dnspython<br>
-you can use pip3 or pip3.7 to install djongo. Just replace 'pip' with 'pip3' or 'pip3.7'
+you can use pip3 or pip3.7 to install pymongo. Just replace 'pip' with 'pip3' or 'pip3.7'<br><br>
 
-#### Integration
-[documentation on integration](https://nesdis.github.io/djongo/integrating-django-with-mongodb/)
+Just set your DATABASE in settings.py with default sqlite3. No model implemented.
