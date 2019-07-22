@@ -1,0 +1,40 @@
+{% extends "pagination/head.html" %}
+
+{% load retrieve_by_ip %}
+{% block table %}
+          {% if port_status %}
+              <h3>{{ ip }}</h3>
+                <table id="data" class="table table-bordered">
+                    <thead class="thead">
+                        <tr>
+                            <th>Port</th>
+                            <th>Status</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          {% for status_row in port_status %}
+                            <td>{{ status_row.port }}</td>
+                            <td>{{ status_row.status }}</td>
+                            <td>{{ status_row.timestamp }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                </table>
+          {% else %}
+            <div class="container">
+              <div class="jumbotron">
+                <h1 class="display-3">No status report, Sir</h1>
+                <p class="lead">Try reloading the page or check the database</p>
+              </div>
+            </div>
+          {% endif %}
+{% endblock %}

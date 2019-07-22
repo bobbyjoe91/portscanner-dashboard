@@ -1,27 +1,16 @@
 {% extends "pagination/head.html" %}
+
 {% block table %}
-          {% if port_status %}
-            <table id="data" class=" table table-bordered">
-                <thead class="thead">
-                    <tr>
-                        <th>IP</th>
-                        <th>Port</th>
-                        <th>Status</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {% for data in port_status %}
-                    <tr>
-                        <td>{{ data.ip }}</td>
-                        <td>{{ data.port }}</td>
-                        <td>{{ data.status }}</td>
-                        <td>{{ data.timestamp }}</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-          {% else %}
-            <h3>NO DATA EXIST</h3>
-          {% endif %}
+    <form class="" action="/table" method="get">
+      <label>
+        Choose IP for detailed checking<br>
+        <select name="ip">
+          {% for ip in ips %}
+          <option value="{{ ip }}">{{ ip }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <input type="submit" name="" value="Go!">
+    </form>
 {% endblock %}
