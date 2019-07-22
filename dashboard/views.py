@@ -14,7 +14,6 @@ def table(request):
     port = request.GET.get('port', '')
     # var = {'ip': ip }
 
-    print(retrieve_by_ip_and_port(ip, str(port)))
     var = {'port_status': retrieve_by_ip_and_port(ip, port),
             'ip': ip,
             'port': port}
