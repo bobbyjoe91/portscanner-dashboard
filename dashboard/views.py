@@ -3,7 +3,7 @@ from .dict_builder import *
 
 # Create your views here.
 detailed_status_data = retrieve('All')
-widget_data = retrieve(5)
+widget_data = retrieve_latest_ip_and_port()
 
 def home(request):
     var = {'port_status': widget_data}

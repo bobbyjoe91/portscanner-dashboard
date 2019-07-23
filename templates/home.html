@@ -14,7 +14,7 @@
             {% for item in status %}
               <tr>
                 {% ifchanged %}
-                <td rowspan="{{ item | length }}">{{ ip }}</td>
+                <td rowspan="{{ status | length }}">{{ ip }}</td>
                 {% endifchanged %}
                 <td><a href="{% url 'table' %}?ip={{ ip }}&port={{ item.port }}">{{ item.port }}</a></td>
                 <td>{{ item.status }}</td>
