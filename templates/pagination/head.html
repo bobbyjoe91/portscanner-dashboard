@@ -20,7 +20,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-    <!-- <script type="text/javascript" src="{% static 'js/autorefresh.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'js/autorefresh.js' %}"></script>
 
     <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.css"/>
@@ -41,7 +41,15 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-sm bg-danger navbar-dark">
-    <a href="{% url 'home' %}">Home</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav><br>
     <div class="wrapper">
       <div class="container-fluid">
@@ -50,6 +58,7 @@
       </div>
     </div>
 
+    <!-- DataTables Script -->
     <script>
     $(document).ready(function() {
     $('table').DataTable( {
