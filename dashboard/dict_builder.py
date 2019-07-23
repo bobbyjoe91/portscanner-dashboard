@@ -47,10 +47,10 @@ def retrieve_latest_ip_and_port():
     return data
 
 def retrieve_by_ip_port_and_daterange(ip, port, daterange):
-    # Dummy date sample, there should be a PARSER and VALIDATOR of daterange input after this
-    # startDate = "16-07-2019 15:27:00"
-    # stopDate = "16-07-2019 15:30:00"
-    startDate, stopDate = daterange.split(" - ")
+    try:
+        startDate, stopDate = daterange.split(" - ")
+    except ValueError:
+        return []
 
     data = list(db[ip].find({
         "port": port,

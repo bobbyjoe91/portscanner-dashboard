@@ -13,14 +13,13 @@ def table(request):
     ip = request.GET.get('ip', '')
     port = request.GET.get('port', '')
     daterange = request.GET.get('daterange', '')
+    
+    var = { 'ip': ip,
+            'port': port}
 
     if daterange != '':
-        var = {'port_status': retrieve_by_ip_port_and_daterange(ip, port, daterange),
-                'ip': ip,
-                'port': port}
+        var['port_status'] = retrieve_by_ip_port_and_daterange(ip, port, daterange)
     else:
-        var = {'port_status': retrieve_by_ip_and_port(ip, port),
-                'ip': ip,
-                'port': port}
+        var['port_status'] = retrieve_by_ip_and_port(ip, port)
 
     return render(request, 'table.html', context=var)
