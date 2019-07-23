@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .dict_builder import retrieve, retrieve_by_ip_and_port
+from .dict_builder import retrieve, retrieve_by_ip_and_port, retrieve_by_ip_port_and_daterange
 
 # Create your views here.
 detailed_status_data = retrieve('All')
@@ -12,11 +12,17 @@ def home(request):
 def table(request):
     ip = request.GET.get('ip', '')
     port = request.GET.get('port', '')
+    daterange = request.GET.get('daterange', '')
     # var = {'ip': ip }
 
-    var = {'port_status': retrieve_by_ip_and_port(ip, port),
-            'ip': ip,
-            'port': port}
+    if daterange != '':
+        var = {'port_status': retrieve_by_ip_port_and_daterange(ip, port, daterange),
+                'ip': ip,
+                'port': port}
+    else:
+        var = {'port_status': retrieve_by_ip_and_port(ip, port),
+                'ip': ip,
+                'port': port}
 
     print(ip, port)
     # if the ip is not exist in dictionary
