@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .dict_builder import retrieve, retrieve_by_ip_and_port
+from .dict_builder import *
 
 # Create your views here.
 detailed_status_data = retrieve('All')
