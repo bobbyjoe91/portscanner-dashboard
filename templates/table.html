@@ -3,6 +3,42 @@
 {% block table %}
           {% if port_status %}
               <h3>{{ ip }}:{{ port }}</h3>
+
+              <form action="{% url 'table' %}">
+                <input type="text" name="daterange" />
+                <input type="hidden" id="ip" name="ip" value="">
+                <input type="hidden" id="port" name="port" value="">
+                  <script>
+                  $(function() {
+                    $('input[name="daterange"]').daterangepicker({
+                      timePicker: true,
+                      startDate: moment().startOf('hour'),
+                      endDate: moment().startOf('hour').add(32, 'hour'),
+                      locale: {
+                        format: 'DD-MM-YYYY hh:mm:ss'
+                      }
+                    });
+                  });
+
+                  function getParameterByName(name) {
+                      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                      results = regex.exec(location.search);
+                      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+                  }
+
+                  $(function () {
+                      var ip = getParameterByName('ip');
+                      var port = getParameterByName('port');
+                      console.log(ip);
+                      if (ip !== '' || port !== '') {
+                        $('#ip').val(ip);
+                        $('#port').val(port);
+                      }
+                  });
+                  </script>
+                <input type="submit" value="Submit">
+              </form>
                 <table id="data" class="table table-bordered">
                     <thead class="thead">
                         <tr>

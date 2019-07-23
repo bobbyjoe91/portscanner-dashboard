@@ -47,3 +47,19 @@ def retrieve_latest_ip_and_port():
         data[ip] = status
 
     return data
+
+def retrieve_by_ip_port_and_daterange(ip, port, daterange):
+    # Dummy date sample, there should be a PARSER and VALIDATOR of daterange input after this
+    # startDate = "16-07-2019 15:27:00"
+    # stopDate = "16-07-2019 15:30:00"
+    startDate, stopDate = daterange.split(" - ")
+    
+    data = list(db[ip].find({
+        "port": port,
+        "timestamp": {
+            "$gte": startDate,
+            "$lte": stopDate
+        }
+    }))
+
+    return data
