@@ -65,7 +65,7 @@
     <!-- DataTables and Script -->
     <script>
     $(document).ready(function() {
-    $('table').DataTable( {
+    $('#data').DataTable( {
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
