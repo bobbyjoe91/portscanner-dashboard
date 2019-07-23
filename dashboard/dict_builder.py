@@ -2,15 +2,10 @@ from pymongo import MongoClient
 
 # HOST = "10.8.30.69"
 HOST = 'mongodb+srv://bobby:irebelthereforeiexist@asli-ri-monitoring-wtiiq.gcp.mongodb.net/test?retryWrites=true&w=majority'
-db_name = 'asli_ri_services'
+DB_NAME = 'asli_ri_services'
 
-client = MongoClient(HOST)
-db = client[db_name]
-
-ips = db.list_collection_names()
-ports = dict()
-for ip in ips:
-    ports[ip] = db[ip].distinct('port')
+CLIENT = MongoClient(HOST)
+DB = CLIENT[DB_NAME]
 
 def is_ip_address(collection_name):
     import re
@@ -19,29 +14,40 @@ def is_ip_address(collection_name):
     else:
         return False
 
+IP = [ip for ip in DB.list_collection_names() if is_ip_address(ip)]
+PORT = dict()
+for ip in IP:
+    PORT[ip] = DB[ip].distinct('port')
+
 def retrieve(nrow='All'):
     data = dict()
-    for collection in db.list_collection_names():
-        # status data will start from the latest
-        if is_ip_address(collection):
-            if nrow != 'All':
-                data[collection] = list(db[collection].find().sort('timestamp', -1).limit(nrow))
-            else:
-                data[collection] = list(db[collection].find().sort('timestamp', -1))
+    for collection in IP:
+        data[collection] = dict()
+        for port in PORT[collection]:
+            # status data will start from the latest
+            data[collection][port] = list(DB[collection].find({'port':port}).sort('timestamp', -1))
 
     return data
 
+ALL_RECORD = retrieve()
+
 def retrieve_by_ip_and_port(ip, port):
-    data = list(db[ip].find({"port":port}).sort('timestamp', -1))
+    result = list()
+
+    data = ALL_RECORD[ip][port]
+    for datum in data:
+        result.append(datum)
+
     return data
 
 def retrieve_latest_ip_and_port():
     data = dict()
 
-    for ip in ips:
+    for ip in IP:
         status = list()
-        for port in ports[ip]:
-            status.append(retrieve_by_ip_and_port(ip, port)[0])
+        for port in PORT[ip]:
+            # get the latest record based on ip and port
+            status.append(ALL_RECORD[ip][port][0])
         data[ip] = status
 
     return data
@@ -52,7 +58,7 @@ def retrieve_by_ip_port_and_daterange(ip, port, daterange):
     except ValueError:
         return []
 
-    data = list(db[ip].find({
+    data = list(DB[ip].find({
         "port": port,
         "timestamp": {
             "$gte": startDate,

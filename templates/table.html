@@ -2,50 +2,49 @@
 
 {% block table %}
           {% if port_status %}
-              <h3>{{ ip }}:{{ port }}</h3>
+              <h3>{{ ip }} : {{ port }}</h3>
 
               <form action="{% url 'table' %}">
                 <input type="text" name="daterange" />
                 <input type="hidden" id="ip" name="ip" value="{{ ip }}">
                 <input type="hidden" id="port" name="port" value="{{ port }}">
                   <script>
-                  $(function() {
-                    $('input[name="daterange"]').daterangepicker({
-                      timePicker: true,
-                      startDate: moment().startOf('hour'),
-                      endDate: moment().startOf('hour').add(32, 'hour'),
-                      locale: {
-                        format: 'DD-MM-YYYY hh:mm:ss'
-                      }
+                    $(function() {
+                      $('input[name="daterange"]').daterangepicker({
+                        timePicker: true,
+                        startDate: moment().startOf('hour'),
+                        endDate: moment().startOf('hour').add(32, 'hour'),
+                        locale: {
+                          format: 'DD-MM-YYYY hh:mm:ss'
+                        }
+                      });
                     });
-                  });
                   </script>
                 <input type="submit" value="Submit">
               </form>
-                <table id="data" class="table table-bordered">
-                    <thead class="thead">
-                        <tr>
-                            <th>Status</th>
-                            <th>Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {% for status_row in port_status %}
-                        <tr>
 
-                            <td>{{ status_row.status }}</td>
-                            <td>{{ status_row.timestamp }}</td>
-
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                    <tfoot>
+              <table id="data" class="table table-bordered">
+                  <thead class="thead">
                       <tr>
-                        <th></th>
-                        <th></th>
+                          <th>Status</th>
+                          <th>Timestamp</th>
                       </tr>
-                    </tfoot>
-                </table>
+                  </thead>
+                  <tbody>
+                  {% for status_row in port_status %}
+                      <tr>
+                        <td>{{ status_row.status }}</td>
+                        <td>{{ status_row.timestamp }}</td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </tfoot>
+              </table>
           {% else %}
             <div class="container">
               <div class="jumbotron">
