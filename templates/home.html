@@ -1,27 +1,6 @@
 {% extends "pagination/head.html" %}
 
 {% block table %}
-    <form class="" action="/table/" method="get">
-      <label>
-        Choose IP for detailed checking<br>
-        <select name="ip">
-          {% for ip in port_status.keys %}
-          <option value="{{ ip }}">{{ ip }}</option>
-          {% endfor %}
-        </select>
-
-        <select name="port">
-          {% for _, status in port_status.items %}
-          {% for item in status %}
-          <option value="{{ item.port }}">{{ item.port }}</option>
-          {% endfor %}
-          {% endfor %}
-        </select>
-      </label>
-
-      <input type="submit" name="" value="Go!">
-    </form>
-
     <div class="container">
 
         <table class="table">

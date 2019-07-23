@@ -4,8 +4,14 @@ from pymongo import MongoClient
 # db_name = 'asli_ri_services'
 HOST = 'mongodb+srv://bobby:irebelthereforeiexist@asli-ri-monitoring-wtiiq.gcp.mongodb.net/test?retryWrites=true&w=majority'
 db_name = 'asli_ri_services'
+
 client = MongoClient(HOST)
 db = client[db_name]
+
+ips = db.list_collection_names()
+ports = dict()
+for ip in ips:
+    ports[ip] = db[ip].distinct('port')
 
 def is_match(collection_name):
     import re
@@ -27,7 +33,18 @@ def retrieve(nrow='All'):
     return data
 
 def retrieve_by_ip_and_port(ip, port):
-    data = list(db[ip].find({"port":port}))
+    data = list(db[ip].find({"port":port}).sort('timestamp', -1))
+
+    return data
+
+def retrieve_latest_ip_and_port():
+    data = dict()
+
+    for ip in ips:
+        status = list()
+        for port in ports[ip]:
+            status.append(retrieve_by_ip_and_port(ip, port)[0])
+        data[ip] = status
 
     return data
 
