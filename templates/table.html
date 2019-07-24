@@ -12,6 +12,8 @@
                     $(function() {
                       $('input[name="daterange"]').daterangepicker({
                         timePicker: true,
+                        timePickerSeconds: true,
+                        timePicker24Hour: true,
                         startDate: moment().startOf('hour'),
                         endDate: moment().startOf('hour').add(32, 'hour'),
                         locale: {
