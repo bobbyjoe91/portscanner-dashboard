@@ -2,6 +2,7 @@
 
 {% block table %}
           {% if port_status %}
+          <p>{{ daterange }}</p>
               <h3>
                 <a href="{% url 'table' %}?ip={{ ip }}&port={{ port }}">{{ ip }} : {{ port }}</a>
               </h3>

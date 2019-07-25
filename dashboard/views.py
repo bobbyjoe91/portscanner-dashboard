@@ -17,11 +17,14 @@ def table(request):
     n_page = request.GET.get('page', 1)
     daterange = request.GET.get('daterange', '')
 
+    path = request.get_full_path()
+
     # each pagination display 50 rows of data
     data_row = 50
 
     status_context = { 'ip': ip,
-            'port': port}
+            'port': port,
+            'daterange': path}
 
     if daterange != '':
         '''
@@ -30,7 +33,7 @@ def table(request):
         '''
         startDate, stopDate = daterange.split(" - ")
         start_date = string_to_time(startDate)
-        stop_date = string_to_time(stopDate, "stop")
+        stop_date = string_to_time(stopDate, "")
 
         # get the latest status data
         status_data = Status.objects.filter(
