@@ -12,7 +12,9 @@
             {% for status in port_status %}
               <tr>
                 <td>{{ status.host }}</td>
-                <td>{{ status.port }}</td>
+                <td>
+                  <a href="{% url 'table' %}?ip={{ status.host }}&port={{ status.port }}">{{ status.port }}</a>
+                </td>
               </tr>
             {% endfor %}
           </tbody>

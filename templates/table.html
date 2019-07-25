@@ -2,7 +2,9 @@
 
 {% block table %}
           {% if port_status %}
-              <h3>{{ ip }} : {{ port }}</h3>
+              <h3>
+                <a href="{% url 'table' %}?ip={{ ip }}&port={{ port }}">{{ ip }} : {{ port }}</a>
+              </h3>
 
               <form action="{% url 'table' %}">
                 <input type="text" name="daterange" />
@@ -28,6 +30,7 @@
               <table id="data" class="table table-bordered">
                   <thead class="thead">
                       <tr>
+                          <th>Agent</th>
                           <th>Status</th>
                           <th>Timestamp</th>
                       </tr>
@@ -35,8 +38,9 @@
                   <tbody>
                   {% for status_row in port_status %}
                       <tr>
+                        <td>{{ status_row.agent }}</td>
                         <td>{{ status_row.status }}</td>
-                        <td>{{ status_row.timestamp | date:"D, d M Y H:m:s" }}</td>
+                        <td>{{ status_row.timestamp | date:"l, d M Y H:i:s" }}</td>
                       </tr>
                   {% endfor %}
                   </tbody>
@@ -44,9 +48,50 @@
                     <tr>
                       <th></th>
                       <th></th>
+                      <th></th>
                     </tr>
                   </tfoot>
               </table>
+
+              <nav aria-label="Page navigation example">
+              {% if port_status.has_other_pages %}
+                <ul class="pagination">
+                  {% if port_status.has_previous %}
+                    <li>
+                      <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ port_status.previous_page_number }}">&laquo;</a>
+                    </li>
+                  {% else %}
+                    <li class="disabled">
+                      <span aria-hidden="true">&laquo;</span>
+                    </li>
+                  {% endif %}
+                  {% for i in port_status.paginator.page_range %}
+                    {% if port_status.number == i %}
+                      <li class="page-item active">
+                        <span>
+                          <a class="page-link">
+                            {{ i }}<span class="sr-only">(current)</span>
+                          </a>
+                        </span>
+                      </li>
+                    {% else %}
+                      <li class="page-item">
+                        <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ i }}">{{ i }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if port_status.has_next %}
+                    <li>
+                      <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ port_status.next_page_number }}">&raquo;</a>
+                    </li>
+                  {% else %}
+                    <li class="disabled">
+                      <span>&raquo;</span>
+                    </li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+              </nav>
           {% else %}
             <div class="container">
               <div class="jumbotron">
@@ -55,4 +100,4 @@
               </div>
             </div>
           {% endif %}
-{% endblock %}
+    {% endblock %}
