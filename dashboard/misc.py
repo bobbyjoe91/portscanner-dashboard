@@ -23,3 +23,10 @@ def string_to_time(time, bound=None):
         hour=time_list[3], minute=time_list[4], second=time_list[5],
         microsecond=0, tzinfo=pytz.UTC
     )
+
+def remove_page(path):
+    if 'page' in path:
+        new_path = re.sub('&page=[0-9]*', '', path)
+        return new_path
+
+    return path

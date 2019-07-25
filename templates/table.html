@@ -2,7 +2,6 @@
 
 {% block table %}
           {% if port_status %}
-          <p>{{ daterange }}</p>
               <h3>
                 <a href="{% url 'table' %}?ip={{ ip }}&port={{ port }}">{{ ip }} : {{ port }}</a>
               </h3>
@@ -59,7 +58,7 @@
                 <ul class="pagination">
                   {% if port_status.has_previous %}
                     <li>
-                      <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ port_status.previous_page_number }}">&laquo;</a>
+                      <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
                     </li>
                   {% else %}
                     <li class="disabled">
@@ -77,13 +76,13 @@
                       </li>
                     {% else %}
                       <li class="page-item">
-                        <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ i }}">{{ i }}</a>
+                        <a class="page-link" href="{{ current_path }}&page={{ i }}">{{ i }}</a>
                       </li>
                     {% endif %}
                   {% endfor %}
                   {% if port_status.has_next %}
                     <li>
-                      <a class="page-link" href="{% url 'table' %}?ip={{ ip }}&port={{ port }}&page={{ port_status.next_page_number }}">&raquo;</a>
+                      <a class="page-link" href="{{ current_path }}&page={{ port_status.next_page_number }}">&raquo;</a>
                     </li>
                   {% else %}
                     <li class="disabled">

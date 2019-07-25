@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Status
-from .date_parser import string_to_time
-
-# Create your views here.
+from .misc import string_to_time, remove_page
 
 def home(request):
     status_data = Status.objects.all()
@@ -17,14 +15,14 @@ def table(request):
     n_page = request.GET.get('page', 1)
     daterange = request.GET.get('daterange', '')
 
-    path = request.get_full_path()
+    path = remove_page(request.get_full_path())
 
     # each pagination display 50 rows of data
-    data_row = 50
+    data_row = 1
 
     status_context = { 'ip': ip,
             'port': port,
-            'daterange': path}
+            'current_path': path}
 
     if daterange != '':
         '''
