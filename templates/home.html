@@ -7,23 +7,13 @@
           <thead>
             <th>IP</th>
             <th>Port</th>
-            <th>Status</th>
           </thead>
           <tbody>
-            {% for ip, status in port_status.items %}
-            {% for item in status %}
+            {% for status in port_status %}
               <tr>
-                {% ifchanged %}
-                <td rowspan="{{ status | length }}">{{ ip }}</td>
-                {% endifchanged %}
-                <td>
-                  <a href="{% url 'table' %}?ip={{ ip }}&port={{ item.port }}">
-                    {{ item.port }}
-                  </a>
-                </td>
-                <td>{{ item.status }}</td>
+                <td>{{ status.host }}</td>
+                <td>{{ status.port }}</td>
               </tr>
-            {% endfor %}
             {% endfor %}
           </tbody>
         </table>

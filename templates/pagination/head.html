@@ -66,6 +66,9 @@
     <script>
     $(document).ready(function() {
       $('#data').DataTable( {
+        scrollY:        400,
+        deferRender:    true,
+        scroller:       true,
         initComplete: function () {
           this.api().columns().every( function () {
             var column = this;

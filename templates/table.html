@@ -36,7 +36,7 @@
                   {% for status_row in port_status %}
                       <tr>
                         <td>{{ status_row.status }}</td>
-                        <td>{{ status_row.timestamp }}</td>
+                        <td>{{ status_row.timestamp | date:"D, d M Y H:m:s" }}</td>
                       </tr>
                   {% endfor %}
                   </tbody>
