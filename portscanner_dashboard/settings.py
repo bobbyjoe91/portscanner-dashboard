@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'asli_ri_services_2',
-        'HOST': '10.8.30.69', # 10.8.30.69
+        'HOST': '127.0.0.1', # 10.8.30.69
         'PORT': 27017
     }
 }
