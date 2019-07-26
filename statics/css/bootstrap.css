@@ -1684,8 +1684,8 @@ pre code {
 
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid #f76d6d;
-  background-color:#f76d6d;
+  border-bottom: 2px solid #303945;
+  background-color:#303945;
   border-radius:5px;
   border-color:#770202;
 }
@@ -4087,6 +4087,7 @@ tbody.collapse.show {
   .navbar-expand-sm .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+    color: #000;
   }
   .navbar-expand-sm > .container,
   .navbar-expand-sm > .container-fluid {
@@ -4386,11 +4387,15 @@ tbody.collapse.show {
 }
 
 .navbar-dark .navbar-brand {
-  color: #fff;
+  -webkit-box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
+  -moz-box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
+  box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
 }
 
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
-  color: #fff;
+  -webkit-box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
+  -moz-box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
+  box-shadow: 0px 7px 10px 0px rgba(163,163,163,1);
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -4410,7 +4415,7 @@ tbody.collapse.show {
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 .navbar-dark .navbar-toggler {
@@ -4427,7 +4432,7 @@ tbody.collapse.show {
 }
 
 .navbar-dark .navbar-text a {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
@@ -6137,6 +6142,7 @@ button.bg-warning:focus {
   background-color: #dc3545 !important;
 }
 
+
 a.bg-danger:hover, a.bg-danger:focus,
 button.bg-danger:hover,
 button.bg-danger:focus {
@@ -6164,7 +6170,8 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #f7f7f7de !important;
+  box-shadow: #999;
 }
 
 .bg-transparent {

@@ -3,11 +3,11 @@
 {% block table %}
     <div class="container">
 
-      <table class="table">
-        <thead>
-          <th>Host</th>
-          <th>Port</th>
-          <th>Status</th>
+      <table class="table table-bordered" style="background-color: white">
+        <thead class="thead" >
+          <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Host</th>
+          <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Port</th>
+          <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Status</th>
         </thead>
         <tbody>
           {% for host, status in port_status.items %}
