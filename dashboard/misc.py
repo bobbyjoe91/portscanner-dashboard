@@ -40,6 +40,11 @@ def get_hosts_and_ports():
 
     for query in query_sets:
         if query['port'] not in hosts_and_ports[query['host']]:
-            hosts_and_ports[query['host']].append(query['port'])
+            hosts_and_ports[query['host']].append(
+                {'port': query['port'],
+                 'status': Status.objects.order_by("-timestamp").filter(host=query['host'],
+                        port=query['port']).values('status')[0]['status']
+                }
+            )
 
     return hosts_and_ports

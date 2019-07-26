@@ -3,23 +3,31 @@
 {% block table %}
     <div class="container">
 
-        <table class="table">
-          <thead>
-            <th>IP</th>
-            <th>Port</th>
-          </thead>
-          <tbody>
-            {% for status in port_status %}
-              <tr>
-                <td>{{ status.host }}</td>
-                <td>
-                  <a href="{% url 'table' %}?ip={{ status.host }}&port={{ status.port }}">{{ status.port }}</a>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <table class="table">
+        <thead>
+          <th>Host</th>
+          <th>Port</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          {% for host, status in port_status.items %}
+          {% for item in status %}
+            <tr>
+              {% ifchanged %}
+                <td rowspan="{{ status | length }}">{{ host }}</td>
+              {% endifchanged %}
+              <td>
+                <a href="{% url 'table' %}?ip={{ host }}&port={{ item.port }}">
+                  {{ item.port }}
+                </a>
+              </td>
+              <td>{{ item.status }}</td>
+            </tr>
+          {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
 
-    </div>
+  </div>
 
 {% endblock %}

@@ -3,12 +3,12 @@ from django.core.paginator import Paginator
 from .models import Status
 from .misc import string_to_time, remove_page, get_hosts_and_ports
 
-# PORTS =
+LATEST_REPORTS = get_hosts_and_ports()
 
 def home(request):
     status_data = Status.objects.all()
-    status_context = {'port_status': status_data}
-    
+    status_context = {'port_status': LATEST_REPORTS}
+
     return render(request, 'home.html', context=status_context)
 
 def table(request):
