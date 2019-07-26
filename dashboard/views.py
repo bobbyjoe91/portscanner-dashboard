@@ -19,7 +19,7 @@ def table(request):
     prev_url = request.META.get('HTTP_REFERER')
     path = remove_page(request.get_full_path())
 
-    # each pagination display 50 rows of data
+    # each pagination display 100 rows of data
     data_row = 100
 
     status_context = { 'ip': ip,
