@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Status
-from .misc import string_to_time, remove_page
+from .misc import string_to_time, remove_page, get_hosts_and_ports
+
+# PORTS =
 
 def home(request):
     status_data = Status.objects.all()
     status_context = {'port_status': status_data}
+    
     return render(request, 'home.html', context=status_context)
 
 def table(request):
