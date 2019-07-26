@@ -64,6 +64,9 @@
                     <ul class="pagination">
                       {% if port_status.has_previous %}
                         <li>
+                          <a class="page-link" href="{{ current_path }}&page=1">First</a>
+                        </li>
+                        <li>
                           <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
                         </li>
                         <li>
@@ -97,20 +100,13 @@
                         {% endif %}
                       {% endfor %}
 
-                      {% if port_status.paginator.num_pages not in page_range %}
-                        <li class="page-item">
-                          <a class="page-link"">...</a>
-                        </li>
-                        <li>
-                          <a class="page-link" href="{{ current_path }}&page={{ port_status.paginator.num_pages }}">
-                            {{ port_status.paginator.num_pages }}
-                          </a>
-                        </li>
-                      {% endif %}
-
                       {% if port_status.has_next %}
                         <li>
                           <a class="page-link" href="{{ current_path }}&page={{ port_status.next_page_number }}">&raquo;</a>
+                        </li>
+
+                        <li>
+                          <a class="page-link" href="{{ current_path }}&page={{ port_status.paginator.num_pages }}">Last</a>
                         </li>
                       {% else %}
                         <li class="disabled">

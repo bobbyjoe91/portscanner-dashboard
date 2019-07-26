@@ -50,6 +50,7 @@ def table(request):
 
     pginator = Paginator(status_data, data_row)
     page_range = paginate(int(n_page), list(pginator.page_range))
+    print(page_range)
 
     # display data row as much as n_page
     status_data = pginator.page(n_page)

@@ -55,7 +55,6 @@ def paginate(n_page, page_range, n=4):
     count = 0
     while count < n:
         if n_page+count in page_range:
-            print(page_range)
             p_range.append(n_page+count)
         count += 1
 
