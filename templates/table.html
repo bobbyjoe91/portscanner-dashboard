@@ -7,7 +7,7 @@
               </h3>
 
               <form action="{% url 'table' %}">
-                <input type="text" name="daterange" />
+                <input class="form-control" style="width: 30%;" type="text" name="daterange" >
                 <input type="hidden" id="ip" name="ip" value="{{ ip }}">
                 <input type="hidden" id="port" name="port" value="{{ port }}">
                   <script>
@@ -24,7 +24,7 @@
                       });
                     });
                   </script>
-                <input type="submit" value="Submit">
+                <br><input class="btn" type="submit" value="Submit">
               </form>
 
               <table id="data" class="table table-bordered">
