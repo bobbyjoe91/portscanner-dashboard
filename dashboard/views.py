@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Status
-from .misc import string_to_time, remove_page, get_hosts_and_ports
+from .misc import *
 
 LATEST_REPORTS = get_hosts_and_ports()
 
@@ -49,10 +49,12 @@ def table(request):
             host=ip, port=port).order_by('-timestamp')
 
     pginator = Paginator(status_data, data_row)
+    page_range = paginate(int(n_page), list(pginator.page_range))
 
     # display data row as much as n_page
     status_data = pginator.page(n_page)
 
+    status_context['page_range'] = page_range
     status_context['port_status'] = status_data
 
     # render pagination

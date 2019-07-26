@@ -6,12 +6,12 @@
                 <a href="{% url 'table' %}?ip={{ ip }}&port={{ port }}">{{ ip }} : {{ port }}</a>
               </h3>
 
-              <form action="{% url 'table' %}"> 
+              <form action="{% url 'table' %}">
                 <input class="form-control" style="width: 30%; display:inline-block; margin-right:5px;" type="text" name="daterange" >
                 <input class="btn btn-danger" style="display:inline-block; margin-bottom:4px; margin-right:5px;" type="submit" value="Submit">
                 <input type="hidden" id="ip" name="ip" value="{{ ip }}">
                 <input type="hidden" id="port" name="port" value="{{ port }}">
-                
+
                   <script>
                     $(function() {
                       $('input[name="daterange"]').daterangepicker({
@@ -26,7 +26,7 @@
                       });
                     });
                   </script>
-                
+
               </form>
 
               <table id="data" class="table table-bordered">
@@ -66,6 +66,14 @@
                         <li>
                           <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
                         </li>
+                        <li>
+                          <a class="page-link" href="{{ current_path }}&page=1">1</a>
+                        </li>
+                        {% if port_status.number != 2 %}
+                          <li class="page-item">
+                            <a class="page-link"">...</a>
+                          </li>
+                        {% endif %}
                       {% else %}
                         <li class="disabled">
                           <a class="page-link">
@@ -73,7 +81,7 @@
                           </a>
                         </li>
                       {% endif %}
-                      {% for i in port_status.paginator.page_range %}
+                      {% for i in page_range %}
                         {% if port_status.number == i %}
                           <li class="page-item active">
                             <span>
@@ -88,6 +96,18 @@
                           </li>
                         {% endif %}
                       {% endfor %}
+
+                      {% if port_status.paginator.num_pages not in page_range %}
+                        <li class="page-item">
+                          <a class="page-link"">...</a>
+                        </li>
+                        <li>
+                          <a class="page-link" href="{{ current_path }}&page={{ port_status.paginator.num_pages }}">
+                            {{ port_status.paginator.num_pages }}
+                          </a>
+                        </li>
+                      {% endif %}
+
                       {% if port_status.has_next %}
                         <li>
                           <a class="page-link" href="{{ current_path }}&page={{ port_status.next_page_number }}">&raquo;</a>

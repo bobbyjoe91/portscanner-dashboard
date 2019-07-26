@@ -48,3 +48,15 @@ def get_hosts_and_ports():
             )
 
     return hosts_and_ports
+
+def paginate(n_page, page_range, n=4):
+    p_range = list()
+
+    count = 0
+    while count < n:
+        if n_page+count in page_range:
+            print(page_range)
+            p_range.append(n_page+count)
+        count += 1
+
+    return p_range
