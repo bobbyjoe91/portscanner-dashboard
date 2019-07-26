@@ -19,6 +19,6 @@ from django.conf.urls import url
 from dashboard import views
 
 urlpatterns = [
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
     path('table/', views.table, name='table'),
 ]
