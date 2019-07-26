@@ -53,53 +53,66 @@
                   </tfoot>
               </table>
 
-              <nav aria-label="Page navigation example">
-              {% if port_status.has_other_pages %}
-                <ul class="pagination">
-                  {% if port_status.has_previous %}
-                    <li>
-                      <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="disabled">
-                      <span aria-hidden="true">&laquo;</span>
-                    </li>
-                  {% endif %}
-                  {% for i in port_status.paginator.page_range %}
-                    {% if port_status.number == i %}
-                      <li class="page-item active">
-                        <span>
+            <div class="container" style="margin-top: 50px;">
+              <div class="row">
+                <div class="col-6 col-md-4"></div>
+                <div class="col-6 col-md-4">
+                  <nav aria-label="Page navigation example">
+                  {% if port_status.has_other_pages %}
+                    <ul class="pagination">
+                      {% if port_status.has_previous %}
+                        <li>
+                          <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
+                        </li>
+                      {% else %}
+                        <li class="disabled">
                           <a class="page-link">
-                            {{ i }}<span class="sr-only">(current)</span>
+                            <span aria-hidden="true">&laquo;</span>
                           </a>
-                        </span>
-                      </li>
-                    {% else %}
-                      <li class="page-item">
-                        <a class="page-link" href="{{ current_path }}&page={{ i }}">{{ i }}</a>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                  {% if port_status.has_next %}
-                    <li>
-                      <a class="page-link" href="{{ current_path }}&page={{ port_status.next_page_number }}">&raquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="disabled">
-                      <span>&raquo;</span>
-                    </li>
+                        </li>
+                      {% endif %}
+                      {% for i in port_status.paginator.page_range %}
+                        {% if port_status.number == i %}
+                          <li class="page-item active">
+                            <span>
+                              <a class="page-link">
+                                {{ i }}<span class="sr-only">(current)</span>
+                              </a>
+                            </span>
+                          </li>
+                        {% else %}
+                          <li class="page-item">
+                            <a class="page-link" href="{{ current_path }}&page={{ i }}">{{ i }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                      {% if port_status.has_next %}
+                        <li>
+                          <a class="page-link" href="{{ current_path }}&page={{ port_status.next_page_number }}">&raquo;</a>
+                        </li>
+                      {% else %}
+                        <li class="disabled">
+                          <a class="page-link">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
                   {% endif %}
-                </ul>
+                  </nav>
+              {% else %}
+                <div class="container">
+                  <div class="jumbotron">
+                    <h1 class="display-3">No status report, Sir</h1>
+                    <p class="lead">Try reloading the page or go back to
+                      <a href="{{ prev_url }}"> previous page</a>
+                    </p>
+                  </div>
+                </div>
               {% endif %}
-              </nav>
-          {% else %}
-            <div class="container">
-              <div class="jumbotron">
-                <h1 class="display-3">No status report, Sir</h1>
-                <p class="lead">Try reloading the page or go back to
-                  <a href="{{ prev_url }}"> previous page</a>
-                </p>
+                </div>
+                <div class="col-6 col-md-4"></div>
               </div>
             </div>
-          {% endif %}
+
     {% endblock %}
