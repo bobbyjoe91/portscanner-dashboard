@@ -18,6 +18,7 @@ def table(request):
     n_page = request.GET.get('page', 1)
     daterange = request.GET.get('daterange', '')
 
+    prev_url = request.META.get('HTTP_REFERER')
     path = remove_page(request.get_full_path())
 
     # each pagination display 50 rows of data
@@ -25,7 +26,8 @@ def table(request):
 
     status_context = { 'ip': ip,
             'port': port,
-            'current_path': path}
+            'current_path': path,
+            'prev_url': prev_url}
 
     if daterange != '':
         '''
