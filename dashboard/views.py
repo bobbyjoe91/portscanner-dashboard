@@ -3,11 +3,9 @@ from django.core.paginator import Paginator
 from .models import Status
 from .misc import *
 
-LATEST_REPORTS = get_hosts_and_ports()
-
 def home(request):
-    status_data = Status.objects.all()
-    status_context = {'port_status': LATEST_REPORTS}
+    latest_reports = get_hosts_and_ports()
+    status_context = {'port_status': latest_reports}
 
     return render(request, 'home.html', context=status_context)
 
@@ -50,7 +48,6 @@ def table(request):
 
     pginator = Paginator(status_data, data_row)
     page_range = paginate(int(n_page), list(pginator.page_range))
-    print(page_range)
 
     # display data row as much as n_page
     status_data = pginator.page(n_page)

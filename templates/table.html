@@ -41,7 +41,11 @@
                   {% for status_row in port_status %}
                       <tr>
                         <td>{{ status_row.agent }}</td>
-                        <td>{{ status_row.status }}</td>
+                        {% if status_row.status == "1" %}
+                          <td style="color:green;">ON</td>
+                        {% else %}
+                          <td style="color:red;">OFF</td>
+                        {% endif %}
                         <td>{{ status_row.timestamp | date:"l, d M Y H:i:s" }}</td>
                       </tr>
                   {% endfor %}
@@ -69,14 +73,6 @@
                         <li>
                           <a class="page-link" href="{{ current_path }}&page={{ port_status.previous_page_number }}">&laquo;</a>
                         </li>
-                        <li>
-                          <a class="page-link" href="{{ current_path }}&page=1">1</a>
-                        </li>
-                        {% if port_status.number != 2 %}
-                          <li class="page-item">
-                            <a class="page-link"">...</a>
-                          </li>
-                        {% endif %}
                       {% else %}
                         <li class="disabled">
                           <a class="page-link">

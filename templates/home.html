@@ -21,7 +21,11 @@
                   {{ item.port }}
                 </a>
               </td>
-              <td>{{ item.status }}</td>
+              {% if item.status == "1" %}
+                <td style="color:green;">ON</td>
+              {% else %}
+                <td style="color:red;">OFF</td>
+              {% endif %}
             </tr>
           {% endfor %}
           {% endfor %}
