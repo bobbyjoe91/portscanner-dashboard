@@ -18,7 +18,7 @@ def table(request):
     path = remove_page(request.get_full_path())
 
     # each pagination display 50 rows of data
-    data_row = 1
+    data_row = 100
 
     status_context = { 'ip': ip,
             'port': port,

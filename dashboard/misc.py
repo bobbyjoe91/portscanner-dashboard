@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 import pytz
 import re
 
@@ -11,18 +11,16 @@ def string_to_time(time, bound=None):
         of a time range. To compensate the accuracy of mongodb ISODate,
         the stop time is added 1 second.
     '''
-    if bound == "stop":
-         if time_list[5] == 59:
-             time_list[5] = 00
-             time_list[4] += 1
-         else:
-             time_list[5] += 1
-
-    return datetime.datetime(
+    time = dt.datetime(
         year=time_list[2], month=time_list[1], day=time_list[0],
         hour=time_list[3], minute=time_list[4], second=time_list[5],
         microsecond=0, tzinfo=pytz.UTC
     )
+    
+    if bound == "stop":
+         time = time + dt.timedelta(seconds=1)
+
+    return time
 
 def remove_page(path):
     if 'page' in path:
