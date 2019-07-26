@@ -1,8 +1,23 @@
+'''
+    This file contains miscellanous functions
+    used for converting and transforming data
+    which will be returned by views.py to the
+    HTML page.
+'''
+
 from .models import Status
 import datetime as dt
 import pytz
 import re
 
+
+
+'''
+    string_to_time converts time parameter, which is in string,
+    to Python 3 datetime object. Bound parameter could be set to
+    "stop", which means the time inputted in the function is the upper
+    bound of a particular date range
+'''
 def string_to_time(time, bound=None):
     split_time = re.findall(r"[0-9]{2,4}", time)
     time_list =  list(map(int, split_time))
@@ -23,6 +38,13 @@ def string_to_time(time, bound=None):
 
     return time
 
+
+'''
+    remove_page deletes "page" parameter form a url
+    this will prevent the current path to be appended
+    by another "page" parameter. The function receives
+    path in string as the parameter
+'''
 def remove_page(path):
     if 'page' in path:
         new_path = re.sub('&page=[0-9]*', '', path)
@@ -30,6 +52,14 @@ def remove_page(path):
 
     return path
 
+'''
+    get_hosts_and_ports return unique host, its ports, and every status
+    of each port.
+
+    Each host has one or more ports. Each port has status, whether 1 or 0.
+    Get_hosts_and_ports provide the latest status information for each hosts
+    and ports.
+'''
 def get_hosts_and_ports():
     query_sets = list(Status.objects.values('host','port').distinct())
     hosts_and_ports = dict()
@@ -49,6 +79,15 @@ def get_hosts_and_ports():
 
     return hosts_and_ports
 
+
+'''
+    pageinate receives n_page as current page position,
+    page_range as python 3 range from 1 to last pagination,
+    and n as number of page generated.
+
+    paginate returns list of number that will be
+    rendered in the pagination around the current page.
+'''
 def paginate(n_page, page_range, n=4):
     p_range = list()
 
