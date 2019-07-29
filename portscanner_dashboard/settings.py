@@ -26,7 +26,7 @@ SECRET_KEY = 'ed==z21$4n6t&mr65_3(7o^mpmfoxwo%f!gy9j2m+lza9b2q6$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.8.30.57']
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'asli_ri_services_2',
-        'HOST': '127.0.0.1', # 10.8.30.69
+        'HOST': '10.8.30.69',
         'PORT': 27017
     }
 }
