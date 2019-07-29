@@ -36,5 +36,4 @@ class Status(models.Model):
     timestamp = models.DateTimeField()
 ```
 <br>
-The database should contain attributes named 'id', 'host', 'port', 'status',<br>
-'agent', and 'timestamp'.
+The database should contain attributes named 'id', 'host', 'port', 'status', 'agent', and 'timestamp'.
