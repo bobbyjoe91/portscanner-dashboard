@@ -22,3 +22,19 @@ DATABASES = {
     }
 }
 ```
+
+### Models
+Models can be accessed in dashboard/models.py. The attributes of the models are specified below:<br>
+```
+from django.db import models
+
+class Status(models.Model):
+    host = models.CharField(max_length=15)
+    port = models.CharField(max_length=5)
+    status = models.CharField(max_length=3)
+    agent = models.CharField(max_length=15)
+    timestamp = models.DateTimeField()
+```
+<br>
+The database should contain attributes named 'id', 'host', 'port', 'status',<br>
+'agent', and 'timestamp'.
