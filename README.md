@@ -16,8 +16,8 @@ You can change it in portscanner_dashboard/settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'asli_ri_services_2',
-        'HOST': '127.0.0.1', # 10.8.30.69
+        'NAME': db_name,
+        'HOST': '127.0.0.1', # your db host ip
         'PORT': 27017
     }
 }
@@ -29,7 +29,7 @@ Models can be accessed in dashboard/models.py. The attributes of the models are 
 from django.db import models
 
 class Status(models.Model):
-    host = models.CharField(max_length=15)
+    host = models.CharField(max_length=16)
     port = models.CharField(max_length=5)
     status = models.CharField(max_length=3)
     agent = models.CharField(max_length=15)

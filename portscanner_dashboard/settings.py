@@ -26,8 +26,8 @@ SECRET_KEY = 'ed==z21$4n6t&mr65_3(7o^mpmfoxwo%f!gy9j2m+lza9b2q6$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.8.30.57']
-
+# Masukkan IP server dalam list/ array di bawah
+ALLOWED_HOSTS = ['10.8.30.57', '127.0.0.1']
 
 # Application definition
 

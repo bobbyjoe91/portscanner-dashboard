@@ -9,8 +9,7 @@ from .models import Status
 import datetime as dt
 import pytz
 import re
-
-
+import operator
 
 '''
     string_to_time converts time parameter, which is in string,
@@ -63,6 +62,7 @@ def remove_page(path):
 def get_hosts_and_ports():
     query_sets = list(Status.objects.values('host','port').distinct())
     hosts_and_ports = dict()
+    sorted_hosts_and_ports = dict()
 
     for query in query_sets:
         if query['host'] not in hosts_and_ports:
@@ -77,7 +77,11 @@ def get_hosts_and_ports():
                 }
             )
 
-    return hosts_and_ports
+    # Sort hosts_and_ports by host
+    for host in sorted(hosts_and_ports.keys()):
+        sorted_hosts_and_ports[host] = hosts_and_ports[host]
+
+    return sorted_hosts_and_ports
 
 
 '''
