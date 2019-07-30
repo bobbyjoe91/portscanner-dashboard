@@ -6,6 +6,7 @@
       <table class="table table-bordered" style="background-color: white">
         <thead class="thead" >
           <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Host</th>
+          <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Keterangan</th>
           <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Port</th>
           <th style="background-color: #545e6d; color:white; border-color: whitesmoke">Status</th>
         </thead>
@@ -15,6 +16,13 @@
             <tr>
               {% ifchanged %}
                 <td rowspan="{{ status | length }}">{{ host }}</td>
+
+                {% if item.keterangan == None %}
+                <td rowspan="{{ status | length }}"></td>
+                {% else %}
+                <td rowspan="{{ status | length }}">{{ item.keterangan }}</td>
+                {% endif %}
+                
               {% endifchanged %}
               <td>
                 <a href="{% url 'table' %}?ip={{ host }}&port={{ item.port }}">

@@ -6,3 +6,7 @@ class Status(models.Model):
     status = models.CharField(max_length=3)
     agent = models.CharField(max_length=15)
     timestamp = models.DateTimeField()
+
+class Keterangan(models.Model):
+    host = models.CharField(max_length=15)
+    keterangan = models.CharField(max_length=5)

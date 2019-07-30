@@ -5,7 +5,7 @@
     HTML page.
 '''
 
-from .models import Status
+from .models import Status, Keterangan
 import datetime as dt
 import pytz
 import re
@@ -59,8 +59,17 @@ def remove_page(path):
     Get_hosts_and_ports provide the latest status information for each hosts
     and ports.
 '''
+def get_keterangan():
+    keterangan = dict()
+    for data in Keterangan.objects.values('host','keterangan'):
+        keterangan[data['host']] = data['keterangan']
+
+    return keterangan
+
 def get_hosts_and_ports():
+    keterangan = get_keterangan()
     query_sets = list(Status.objects.values('host','port').distinct())
+
     hosts_and_ports = dict()
     sorted_hosts_and_ports = dict()
 
@@ -69,11 +78,17 @@ def get_hosts_and_ports():
             hosts_and_ports[query['host']] = list()
 
     for query in query_sets:
+        try:
+            ket_host = keterangan[query['host']]
+        except KeyError:
+            ket_host = None
+
         if query['port'] not in hosts_and_ports[query['host']]:
             hosts_and_ports[query['host']].append(
                 {'port': query['port'],
                  'status': Status.objects.order_by("-timestamp").filter(host=query['host'],
-                        port=query['port']).values('status')[0]['status']
+                        port=query['port']).values('status')[0]['status'],
+                 'keterangan': ket_host
                 }
             )
 
