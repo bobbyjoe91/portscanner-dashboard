@@ -4,8 +4,11 @@ from .models import Status
 from .misc import *
 
 def home(request):
+    latest_query = Status.objects.all().order_by('-timestamp')[0]
+
     latest_reports = get_hosts_and_ports()
-    status_context = {'port_status': latest_reports}
+    status_context = {'port_status': latest_reports,
+                      'latest_query': latest_query.timestamp}
 
     return render(request, 'home.html', context=status_context)
 
@@ -34,7 +37,7 @@ def table(request):
         '''
         startDate, stopDate = daterange.split(" - ")
         start_date = string_to_time(startDate)
-        stop_date = string_to_time(stopDate, "")
+        stop_date = string_to_time(stopDate, "stop")
 
         # get the latest status data
         status_data = Status.objects.filter(

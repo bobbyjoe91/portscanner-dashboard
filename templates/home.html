@@ -1,6 +1,10 @@
 {% extends "pagination/head.html" %}
 
 {% block table %}
+    <div class="shadow-none p-3 mb-5 bg-light rounded">
+      Latest data is queried on {{ latest_query | date:"l, d M Y H:i:s" }}
+    </div>
+
     <div class="container">
 
       <table class="table table-bordered" style="background-color: white">
@@ -22,7 +26,7 @@
                 {% else %}
                 <td rowspan="{{ status | length }}">{{ item.keterangan }}</td>
                 {% endif %}
-                
+
               {% endifchanged %}
               <td>
                 <a href="{% url 'table' %}?ip={{ host }}&port={{ item.port }}">
