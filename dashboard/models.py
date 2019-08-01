@@ -7,6 +7,7 @@ class Status(models.Model):
     agent = models.CharField(max_length=15)
     timestamp = models.DateTimeField()
 
-class Keterangan(models.Model):
+class Service(models.Model):
     host = models.CharField(max_length=15)
-    keterangan = models.CharField(max_length=5)
+    port = models.CharField(max_length=15)
+    service = models.CharField(max_length=20)

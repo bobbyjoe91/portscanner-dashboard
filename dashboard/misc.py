@@ -5,7 +5,7 @@
     HTML page.
 '''
 
-from .models import Status, Keterangan
+from .models import Status, Service
 import datetime as dt
 import pytz
 import re
@@ -59,15 +59,16 @@ def remove_page(path):
     Get_hosts_and_ports provide the latest status information for each hosts
     and ports.
 '''
-def get_keterangan():
-    keterangan = dict()
-    for data in Keterangan.objects.values('host','keterangan'):
-        keterangan[data['host']] = data['keterangan']
+def get_services():
+    service = dict()
+    for data in Service.objects.values('host','port','service'):
+        service[(data['host'], data['port'])] = data['service']
 
-    return keterangan
+    return service
 
 def get_hosts_and_ports():
-    keterangan = get_keterangan()
+    service = get_services()
+    print(service)
     query_sets = list(Status.objects.values('host','port').distinct())
 
     hosts_and_ports = dict()
@@ -79,7 +80,8 @@ def get_hosts_and_ports():
 
     for query in query_sets:
         try:
-            ket_host = keterangan[query['host']]
+            host_port = (query['host'], query['port'])
+            ket_host = service[host_port]
         except KeyError:
             ket_host = None
 
@@ -88,7 +90,7 @@ def get_hosts_and_ports():
                 {'port': query['port'],
                  'status': Status.objects.order_by("-timestamp").filter(host=query['host'],
                         port=query['port']).values('status')[0]['status'],
-                 'keterangan': ket_host
+                 'service': ket_host
                 }
             )
 
@@ -100,7 +102,7 @@ def get_hosts_and_ports():
 
 
 '''
-    pageinate receives n_page as current page position,
+    paginate receives n_page as current page position,
     page_range as python 3 range from 1 to last pagination,
     and n as number of page generated.
 
