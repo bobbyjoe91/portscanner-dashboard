@@ -2,7 +2,11 @@
 
 {% block table %}
     <div class="shadow-none p-3 mb-5 bg-light rounded">
-      Latest data is queried on {{ latest_query | date:"l, d M Y H:i:s" }}
+      {% if latest_query != None %}
+        Latest data is queried on {{ latest_query | date:"l, d M Y H:i:s" }}
+      {% else %}
+        Database is empty
+      {% endif %}
     </div>
 
     <div class="container">

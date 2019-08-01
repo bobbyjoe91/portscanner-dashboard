@@ -68,7 +68,6 @@ def get_services():
 
 def get_hosts_and_ports():
     service = get_services()
-    print(service)
     query_sets = list(Status.objects.values('host','port').distinct())
 
     hosts_and_ports = dict()

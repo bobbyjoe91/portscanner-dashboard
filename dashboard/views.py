@@ -4,11 +4,14 @@ from .models import Status
 from .misc import *
 
 def home(request):
-    latest_query = Status.objects.all().order_by('-timestamp')[0]
-
-    latest_reports = get_hosts_and_ports()
-    status_context = {'port_status': latest_reports,
-                      'latest_query': latest_query.timestamp}
+    try:
+        latest_query = Status.objects.all().order_by('-timestamp')[0]
+        latest_reports = get_hosts_and_ports()
+        status_context = {'port_status': latest_reports,
+                          'latest_query': latest_query.timestamp}
+    except IndexError:
+        status_context = {'port_status': {},
+                          'latest_query': None}
 
     return render(request, 'home.html', context=status_context)
 
